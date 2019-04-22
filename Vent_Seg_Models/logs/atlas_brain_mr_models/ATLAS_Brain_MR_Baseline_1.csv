@@ -1,0 +1,3 @@
+epoch,train_loss,valid_loss,dice_score
+0,0.099473,0.059017,0.898874
+1,nan,nan,0.000000
