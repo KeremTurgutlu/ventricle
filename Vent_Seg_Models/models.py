@@ -53,15 +53,6 @@ def residual_unet_wide():
     'https://arxiv.org/pdf/1802.10508.pdf'
     return VolumetricResidualUnet(in_c=12, p=0.2, norm_type='instance', actn='prelu')
 
-# residual fused unet
-def residual_unet_v2():
-    'https://arxiv.org/pdf/1802.10508.pdf'
-    return VolumetricResidualUnet(in_c=8, p=0.2, norm_type='batch', actn='relu')
-
-# residual fused unet wide
-def residual_unet_wide_v2():
-    'https://arxiv.org/pdf/1802.10508.pdf'
-    return VolumetricResidualUnet(in_c=12, p=0.2, norm_type='batch', actn='relu')
 
 model_dict = {
     'unet_default': unet_default,
@@ -87,9 +78,7 @@ experiment_model_dict = {
     'baseline8': partial(unet_deep, p=0., norm_type='group', actn='prelu'),
     'baseline9': partial(unet_wide_deep, p=0., norm_type='group', actn='prelu'),
     'baseline10': residual_unet,
-    'baseline11': residual_unet_wide,
-    'baseline10_v2': residual_unet_v2,
-    'baseline11_v2': residual_unet_wide_v2,
+    'baseline11': residual_unet_wide
 }
 
 ####################

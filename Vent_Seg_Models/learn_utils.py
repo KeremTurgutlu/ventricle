@@ -10,6 +10,7 @@ import warnings
 warnings.filterwarnings('ignore', '.*output shape of zoom.*')
 from tqdm import tqdm_notebook
 from fastai.callbacks import *
+from ipyexperiments import IPyExperimentsPytorch
 
 __all__ = ['get_img_pred_masks', 'plot_predictions', 'dice_score', 'dice_loss', 'MixedLoss',
            'CatchNanGrad', 'CatchNanActs', 'CatchNanParameters', 'lsuv_init']
@@ -93,17 +94,40 @@ class CatchNanParameters(LearnerCallback):
                     print (f'Epoch/Batch ({epoch}/{num_batch}): Invalid Parameter, terminating training.')
                     print(m,o)
                     return {'stop_epoch': True, 'stop_training': True, 'skip_validate': True}
+                
+class ActStats:
+    def __init__(self):
+        pass
+    def __call__(self, m, i, o):
+        d = o.data
+        self.mean,self.std = d.mean().item(),d.std().item()
+
+def lsuv_module(m, model, xb):
+    stats = ActStats()
+    h = Hook(m, stats)
+
+    if hasattr(m, 'bias'): 
+        while model(xb) is not None and abs(stats.mean)  > 1e-3: m.bias -= stats.mean
+    if hasattr(m, 'weight'):
+        while model(xb) is not None and abs(stats.std-1) > 1e-3: m.weight.data /= stats.std
+
+    h.remove()
+    return stats.mean, stats.std
 
 def lsuv_init(learn):
     "initialize model parameters with LSUV - https://arxiv.org/abs/1511.06422"
-    with IPyExperimentsPytorch():
-        modules = [m for m in flatten_model(learn.model) if hasattr(m, 'weight') and m.weight is not None]
-        mdl = learn.model.cuda()
-        xb, yb = learn.data.one_batch()
-        for m in modules: print(lsuv_module(m, learn.model, xb.cuda()))
-        for m in modules: 
-            if hasattr(m, 'weight'): assert not torch.any(torch.isnan(m.weight))
-            if hasattr(m, 'bias'): assert not torch.any(torch.isnan(m.bias))
+    modules = [m for m in flatten_model(learn.model) if hasattr(m, 'weight') and m.weight is not None]
+    mdl = learn.model.cuda()
+    xb, yb = learn.data.one_batch()
+    for m in modules: print(lsuv_module(m, learn.model, xb.cuda()))
+    for m in modules: 
+        if hasattr(m, 'weight'): assert not torch.any(torch.isnan(m.weight))
+        if hasattr(m, 'bias'): assert not torch.any(torch.isnan(m.bias))
+    del modules
+    del mdl
+    del xb
+    del yb
+    gc.collect()
             
 def get_img_pred_masks(learner, dl, thresh=0.5):
     model = learner.model.eval()

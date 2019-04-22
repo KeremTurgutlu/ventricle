@@ -41,7 +41,8 @@ def main(
     one_cycle:Param("do one cycle or general sched", int)=1,
     early_stop:Param("do early stopping", int)=1,
     clip:Param("do gradient clipping", float)=0.,
-    eps:Param("Adam eps", float)=1e-8):
+    eps:Param("Adam eps", float)=1e-8, 
+    lsuv:Param("do lsuv init", int)=0):
     
     """Distrubuted training of a given experiment.
     Fastest speed is if you run as follows:
@@ -96,7 +97,10 @@ def main(
     learn.to_distributed(gpu)
     if clip: learn.to_fp16(dynamic=True, clip=clip, max_noskip=500, max_scale=2*32) 
     else: learn.to_fp16(dynamic=True)
-        
+       
+    # lsuv init
+    if lsuv: lsuv_init(learn)
+    
     # schedule
     b_its = len(data.train_dl)
     ph1 = (TrainingPhase(epochs*0.5*b_its)
