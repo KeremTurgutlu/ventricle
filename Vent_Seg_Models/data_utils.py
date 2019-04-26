@@ -254,9 +254,33 @@ tl_brain_ct_model_dict = {
     'TL_Brain_CT_Baseline_11': 'best_of_ATLAS_Brain_MR_Baseline_11'
 }
 
+tl_ventricle_mr_model_dict = {
+    'TL_Ventricle_MR_Baseline_1': 'best_of_ATLAS_Ventricle_MR_Baseline_1',
+    'TL_Ventricle_MR_Baseline_2': 'best_of_ATLAS_Ventricle_MR_Baseline_2',
+    'TL_Ventricle_MR_Baseline_3': 'best_of_ATLAS_Ventricle_MR_Baseline_3',
+    'TL_Ventricle_MR_Baseline_4': 'best_of_ATLAS_Ventricle_MR_Baseline_4',
+    'TL_Ventricle_MR_Baseline_5': 'best_of_ATLAS_Ventricle_MR_Baseline_5',
+    'TL_Ventricle_MR_Baseline_6': 'best_of_ATLAS_Ventricle_MR_Baseline_6',
+    'TL_Ventricle_MR_Baseline_7': 'best_of_ATLAS_Ventricle_MR_Baseline_7',
+    'TL_Ventricle_MR_Baseline_8': 'best_of_ATLAS_Ventricle_MR_Baseline_8',
+    'TL_Ventricle_MR_Baseline_9': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    'TL_Ventricle_MR_Baseline_10': 'best_of_ATLAS_Ventricle_MR_Baseline_10',
+    'TL_Ventricle_MR_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11'
+}
 
-
-
+tl_ventricle_ct_model_dict = {
+    'TL_Ventricle_CT_Baseline_1': 'best_of_ATLAS_Ventricle_MR_Baseline_1',
+    'TL_Ventricle_CT_Baseline_2': 'best_of_ATLAS_Ventricle_MR_Baseline_2',
+    'TL_Ventricle_CT_Baseline_3': 'best_of_ATLAS_Ventricle_MR_Baseline_3',
+    'TL_Ventricle_CT_Baseline_4': 'best_of_ATLAS_Ventricle_MR_Baseline_4',
+    'TL_Ventricle_CT_Baseline_5': 'best_of_ATLAS_Ventricle_MR_Baseline_5',
+    'TL_Ventricle_CT_Baseline_6': 'best_of_ATLAS_Ventricle_MR_Baseline_6',
+    'TL_Ventricle_CT_Baseline_7': 'best_of_ATLAS_Ventricle_MR_Baseline_7',
+    'TL_Ventricle_CT_Baseline_8': 'best_of_ATLAS_Ventricle_MR_Baseline_8',
+    'TL_Ventricle_CT_Baseline_9': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    'TL_Ventricle_CT_Baseline_10': 'best_of_ATLAS_Ventricle_MR_Baseline_10',
+    'TL_Ventricle_CT_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11'
+}
 
 
 

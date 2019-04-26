@@ -70,7 +70,8 @@ def main(
     epochs:Param("number of epochs", int)=100,
     one_cycle:Param("do one cycle or general sched", int)=1,
     early_stop:Param("do early stopping", int)=1,
-    clip:Param("do gradient clipping", float)=0.):
+    clip:Param("do gradient clipping", float)=0.,
+    load_dir:Param("directory to load pretrained model", str)='atlas_brain_mr_models'):
     
     """Distrubuted training of a given experiment.
     Fastest speed is if you run as follows:
@@ -136,7 +137,7 @@ def main(
     old_model_name = tl_model_dict[MODEL_NAME]
     if not int(gpu): print(f"Loading old: {old_model_name}")
     actual_model_dir = learn.model_dir
-    learn.model_dir = 'atlas_brain_mr_models' # in order to load the atlas model
+    learn.model_dir = load_dir # in order to load the atlas model
     learn.load(old_model_name)
     learn.model_dir = actual_model_dir
     
@@ -159,7 +160,7 @@ def main(
     #Fine tuning with low lr=3e-3 improves
     for i in list(range(1, n_groups)):
         _epochs = next(tl_epochs)
-        if not int(gpu): print(f"Finetuning to layer: {-1} epochs: {_epochs}")
+        if not int(gpu): print(f"Finetuning to layer: {-i} epochs: {_epochs}")
         learn.freeze_to(-i)
         learn.fit_one_cycle(_epochs, slice(lr))
         best_init = learn.save_model_callback.best
