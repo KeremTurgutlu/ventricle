@@ -41,6 +41,7 @@ def main(
     one_cycle:Param("do one cycle or general sched", int)=1,
     early_stop:Param("do early stopping", int)=1,
     clip:Param("do gradient clipping", float)=0.,
+    sample_size:Param("Number of samples in training", int)=None,
     eps:Param("Adam eps", float)=1e-8, 
     lsuv:Param("do lsuv init", int)=0):
     
@@ -56,6 +57,8 @@ def main(
     # data
     f = data_dict[data_name]
     train_paths, valid_paths, test1_paths, test2_paths = f()
+    if sample_size: train_paths = [train_paths[0][:sample_size], train_paths[1][:sample_size]]
+    
     
     train_ds = MRI_3D_Dataset(*train_paths)
     valid_ds = MRI_3D_Dataset(*valid_paths)
@@ -71,7 +74,7 @@ def main(
     apply_leaf(m, partial(cond_init, init_func= nn.init.kaiming_normal_))
     
     # INFO
-    if not int(gpu): print(f"Training: {MODEL_NAME} Model: {m.__class__}")
+    if not int(gpu): print(f"Training: {MODEL_NAME} Model: {m.__class__} Train Size: {len(train_paths)}")
         
     # learn
     early_stop_cb = partial(EarlyStoppingCallback, monitor='dice_score', mode='max', patience=5)

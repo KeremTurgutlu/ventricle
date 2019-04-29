@@ -264,6 +264,8 @@ tl_ventricle_mr_model_dict = {
     'TL_Ventricle_MR_Baseline_7': 'best_of_ATLAS_Ventricle_MR_Baseline_7',
     'TL_Ventricle_MR_Baseline_8': 'best_of_ATLAS_Ventricle_MR_Baseline_8',
     'TL_Ventricle_MR_Baseline_9': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+#     'TL_Ventricle_MR_Baseline_9_10SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    'TL_Ventricle_MR_Baseline_9_10SAMPLES': 'best_of_ATLAS_Brain_MR_Baseline_9',
     'TL_Ventricle_MR_Baseline_10': 'best_of_ATLAS_Ventricle_MR_Baseline_10',
     'TL_Ventricle_MR_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11'
 }

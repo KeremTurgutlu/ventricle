@@ -91,10 +91,14 @@ def _baseline1_split(m:nn.Module): return (nn.ModuleList([m.downblocks,m.middle]
 
 def _baseline6_split(m:nn.Module): return (m.layers[:4], m.layers[4:6], m.layers[7:])
 
+# def _baseline8_split(m:nn.Module): return (nn.ModuleList([m.downblocks, m.middle]),
+#                                             m.upblocks[:3],
+#                                             m.upblocks[3:],
+#                                             m.conv_final)
+
 def _baseline8_split(m:nn.Module): return (nn.ModuleList([m.downblocks, m.middle]),
                                             m.upblocks[:3],
-                                            m.upblocks[3:],
-                                            m.conv_final)
+                                            nn.ModuleList([m.upblocks[3:], m.conv_final]))
 
 def _baseline10_split(m:nn.Module): return (nn.ModuleList([m.down1, m.down2, m.down3, m.down4]),
                                            nn.ModuleList([m.middle, m.upblock1]),

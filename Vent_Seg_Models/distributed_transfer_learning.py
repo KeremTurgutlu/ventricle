@@ -71,6 +71,7 @@ def main(
     one_cycle:Param("do one cycle or general sched", int)=1,
     early_stop:Param("do early stopping", int)=1,
     clip:Param("do gradient clipping", float)=0.,
+    sample_size:Param("Number of samples in training", int)=None,
     load_dir:Param("directory to load pretrained model", str)='atlas_brain_mr_models'):
     
     """Distrubuted training of a given experiment.
@@ -85,6 +86,7 @@ def main(
     # data
     f = data_dict[data_name]
     train_paths, valid_paths, test1_paths, test2_paths = f()
+    if sample_size: train_paths = [train_paths[0][:sample_size], train_paths[1][:sample_size]]
     
     train_ds = MRI_3D_Dataset(*train_paths)
     valid_ds = MRI_3D_Dataset(*valid_paths)
