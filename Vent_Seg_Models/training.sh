@@ -1218,14 +1218,14 @@
 
 
 
-# #######################################
-#     ### EXPERIMENTAL - POCs ###
-# #######################################
+# # #######################################
+# #     ### MR EXPERIMENTAL - POCs ###
+# # #######################################
 
 
-# # Baseline - 9
-# python ../../fastai/fastai/launch.py --gpus=12345 ./distributed_training.py \
-# --MODEL_NAME=NOTL_Ventricle_MR_Baseline_9_10SAMPLES \
+# # NOTL Sample Size = 10
+# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_training.py \
+# --MODEL_NAME=NOTL_Ventricle_MR_Samples10_Baseline_9 \
 # --model_dir=notl_ventricle_mr_models \
 # --data_name=notl_ventricle_mr \
 # --bs=1 \
@@ -1233,33 +1233,136 @@
 # --loss_func=dice --lr=0.03 --sample_size=10 \
 # --one_cycle=1 --early_stop=1 --clip=0 
 
-# Baseline - 9
-python ../../fastai/fastai/launch.py --gpus=12345 ./distributed_transfer_learning.py \
---MODEL_NAME=TL_Ventricle_MR_Baseline_9_10SAMPLES \
---model_dir=tl_ventricle_mr_models \
---tl_model_dict=tl_ventricle_mr_model_dict \
---data_name=notl_ventricle_mr \
---load_dir=atlas_brain_mr_models \
+# # TL Sample Size = 10
+# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
+# --MODEL_NAME=TL_Ventricle_MR_Samples10_Baseline_9 \
+# --model_dir=tl_ventricle_mr_models \
+# --tl_model_dict=tl_ventricle_mr_model_dict \
+# --data_name=notl_ventricle_mr \
+# --load_dir=atlas_ventricle_mr_models \
+# --bs=1 \
+# --model_name=baseline9 --sample_size=10 --lr=1e-2 \
+# --loss_func=dice \
+# --epochs=20
+
+
+# # NOTL Sample Size = 20
+# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_training.py \
+# --MODEL_NAME=NOTL_Ventricle_MR_Samples20_Baseline_9 \
+# --model_dir=notl_ventricle_mr_models \
+# --data_name=notl_ventricle_mr \
+# --bs=1 \
+# --model_name=baseline9 \
+# --loss_func=dice --lr=0.03 --sample_size=20 \
+# --one_cycle=1 --early_stop=1 --clip=0 
+
+# # TL Sample Size = 20
+# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
+# --MODEL_NAME=TL_Ventricle_MR_Samples20_Baseline_9 \
+# --model_dir=tl_ventricle_mr_models \
+# --tl_model_dict=tl_ventricle_mr_model_dict \
+# --data_name=notl_ventricle_mr \
+# --load_dir=atlas_ventricle_mr_models \
+# --bs=1 \
+# --model_name=baseline9 --sample_size=20 --lr=1e-2 \
+# --loss_func=dice \
+# --epochs=20
+
+
+# # NOTL Sample Size = 50
+# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_training.py \
+# --MODEL_NAME=NOTL_Ventricle_MR_Samples50_Baseline_9 \
+# --model_dir=notl_ventricle_mr_models \
+# --data_name=notl_ventricle_mr \
+# --bs=1 \
+# --model_name=baseline9 \
+# --loss_func=dice --lr=0.03 --sample_size=50 \
+# --one_cycle=1 --early_stop=1 --clip=0 
+
+# # TL Sample Size = 50
+# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
+# --MODEL_NAME=TL_Ventricle_MR_Samples50_Baseline_9  \
+# --model_dir=tl_ventricle_mr_models \
+# --tl_model_dict=tl_ventricle_mr_model_dict \
+# --data_name=notl_ventricle_mr \
+# --load_dir=atlas_ventricle_mr_models \
+# --bs=1 \
+# --model_name=baseline9 --sample_size=50 --lr=1e-2 \
+# --loss_func=dice \
+# --epochs=20
+
+# #######################################
+#     ### CT EXPERIMENTAL - POCs ###
+# #######################################
+
+
+# # NOTL Sample Size = 10
+# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_training.py \
+# --MODEL_NAME=NOTL_Ventricle_CT_Samples10_Baseline_11 \
+# --model_dir=notl_ventricle_ct_models \
+# --data_name=notl_ventricle_ct \
+# --bs=1 \
+# --model_name=baseline11 \
+# --loss_func=dice --lr=0.03 --sample_size=10 \
+# --one_cycle=1 --early_stop=1 --clip=0 --eps=1e-4
+
+# # TL Sample Size = 10
+# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
+# --MODEL_NAME=TL_Ventricle_CT_Samples10_Baseline_11 \
+# --model_dir=tl_ventricle_ct_models \
+# --tl_model_dict=tl_ventricle_ct_model_dict \
+# --data_name=notl_ventricle_ct \
+# --load_dir=atlas_ventricle_mr_models \
+# --bs=1 \
+# --model_name=baseline11 --sample_size=10 --lr=1e-2 \
+# --loss_func=dice \
+# --epochs=20 
+
+
+# # NOTL Sample Size = 20
+# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_training.py \
+# --MODEL_NAME=NOTL_Ventricle_CT_Samples20_Baseline_11 \
+# --model_dir=notl_ventricle_ct_models \
+# --data_name=notl_ventricle_ct \
+# --bs=1 \
+# --model_name=baseline11 \
+# --loss_func=dice --lr=0.03 --sample_size=20 \
+# --one_cycle=1 --early_stop=1 --clip=0 --eps=1e-3
+
+# TL Sample Size = 20
+python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
+--MODEL_NAME=TL_Ventricle_CT_Samples20_Baseline_11 \
+--model_dir=tl_ventricle_ct_models \
+--tl_model_dict=tl_ventricle_ct_model_dict \
+--data_name=notl_ventricle_ct \
+--load_dir=atlas_ventricle_mr_models \
 --bs=1 \
---model_name=baseline9 --sample_size=10 --lr=1e-2 \
+--model_name=baseline11 --sample_size=20 --lr=1e-2 \
 --loss_func=dice \
 --epochs=20
 
-# # Baseline - 9
-# python ../../fastai/fastai/launch.py --gpus=12345 ./distributed_training.py \
-# --MODEL_NAME=NOTL_Ventricle_MR_Baseline_9_ROUND2 \
-# --model_dir=notl_ventricle_mr_models \
-# --data_name=notl_ventricle_mr \
-# --bs=1 \
-# --model_name=baseline9 \
-# --loss_func=dice --lr=0.03 --sample_size=10 \
-# --one_cycle=1 --early_stop=1 --clip=0 
 
+# NOTL Sample Size = 50
+python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_training.py \
+--MODEL_NAME=NOTL_Ventricle_CT_Samples50_Baseline_11 \
+--model_dir=notl_ventricle_ct_models \
+--data_name=notl_ventricle_ct \
+--bs=1 \
+--model_name=baseline11 \
+--loss_func=dice --lr=0.03 --sample_size=50 \
+--one_cycle=1 --early_stop=1 --clip=0 --eps=1e-3
 
-
-
-
-
+# TL Sample Size = 50
+python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
+--MODEL_NAME=TL_Ventricle_CT_Samples50_Baseline_11  \
+--model_dir=tl_ventricle_ct_models \
+--tl_model_dict=tl_ventricle_ct_model_dict \
+--data_name=notl_ventricle_ct \
+--load_dir=atlas_ventricle_mr_models \
+--bs=1 \
+--model_name=baseline11 --sample_size=50 --lr=1e-2 \
+--loss_func=dice \
+--epochs=20
 
 
 

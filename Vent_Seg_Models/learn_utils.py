@@ -13,9 +13,18 @@ from fastai.callbacks import *
 from ipyexperiments import IPyExperimentsPytorch
 
 __all__ = ['get_img_pred_masks', 'plot_predictions', 'dice_score', 'dice_loss', 'MixedLoss',
-           'CatchNanGrad', 'CatchNanActs', 'CatchNanParameters', 'lsuv_init']
+           'CatchNanGrad', 'CatchNanActs', 'CatchNanParameters', 'lsuv_init', 'cond_init']
 
+bn_types = (nn.BatchNorm1d, nn.BatchNorm2d, nn.BatchNorm3d)
+gnorm_types = (nn.GroupNorm,)
+insnorm_types = (nn.InstanceNorm1d, nn.InstanceNorm2d, nn.InstanceNorm3d)
+norm_types = bn_types + gnorm_types + insnorm_types
 
+def cond_init(m:nn.Module, init_func:LayerFunc):
+    "Initialize the non-batchnorm layers of `m` with `init_func`."
+    if (not isinstance(m, norm_types)) and (not isinstance(m, nn.PReLU)) and requires_grad(m): 
+        init_default(m, init_func)
+        
 class BackwardHookCallback(LearnerCallback):
     "Callback that can be used to register hooks on `modules`. Implement the corresponding function in `self.hook`."
     def __init__(self, learn:Learner, modules:Sequence[nn.Module]=None, do_remove:bool=True):
@@ -156,9 +165,9 @@ def plot_predictions(true, pred, mask):
         ax.set_title(t, fontdict={"fontsize":20})
 
 def dice_score(logits, targets, thresh=0.5):
-    hard_preds = (torch.sigmoid(logits) > thresh).float()
-    m1 = hard_preds.view(-1)  # Flatten
-    m2 = targets.view(-1)  # Flatten
+    hard_preds = torch.sigmoid(logits) > thresh
+    m1 = hard_preds.view(-1).float() 
+    m2 = targets.view(-1).float()
     intersection = (m1 * m2).sum()
     return (2. * intersection) / (m1.sum() + m2.sum() + 1e-6)
 

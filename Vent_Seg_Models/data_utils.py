@@ -21,7 +21,7 @@ class MRI_3D_Dataset(object):
         mask_voxel = np.load(self.ventricles[index]).astype(np.float32)
         if self.transform:
             image_voxel, mask_voxel = self.transform(image_voxel, mask_voxel)
-        return FT(image_voxel[None,:]), FT(mask_voxel) 
+        return FT(image_voxel[None,:]), FT(mask_voxel)
 
     def __len__(self):
         return len(self.img_fnames) 
@@ -122,7 +122,7 @@ def get_atlas_brain_mr_data():
 
 def get_notl_ventricle_mr_data():
     
-    data_path = Path("../../data/Segmentation_Dataset/MR_Dataset")
+    data_path = Path("/home/turgutluk/data/Segmentation_Dataset/MR_Dataset")
 
     trn_img = sorted(list(Path(data_path/"train/skull_stripped_v2").iterdir()))
     trn_mask = sorted(list(Path(data_path/"train/ventricle_masks").iterdir()))
@@ -164,7 +164,7 @@ def get_notl_ventricle_mr_data():
 
 def get_notl_ventricle_ct_data():
 
-    data_path = Path("../../data/Segmentation_Dataset/CT_Dataset")
+    data_path = Path("/home/turgutluk/data/Segmentation_Dataset/CT_Dataset")
     trn_img = sorted(list(Path(data_path/"train/skull_stripped_v2").iterdir()))
     trn_mask = sorted(list(Path(data_path/"train/ventricle_masks").iterdir()))
 
@@ -195,7 +195,7 @@ def get_notl_ventricle_ct_data():
 
 def get_atlas_ventricle_mr_data():
 
-    data_path = Path("../../data/Segmentation_Dataset/MR_Dataset_Atlas")
+    data_path = Path("/home/turgutluk/data/Segmentation_Dataset/MR_Dataset_Atlas")
     trn_img = sorted(list(Path(data_path/"train/skull_stripped_v2").iterdir()))
     trn_mask = sorted(list(Path(data_path/"train/ventricle_atlas").iterdir()))
     valid_img = sorted(list(Path(data_path/"validation/skull_stripped_v2").iterdir()))
@@ -264,10 +264,27 @@ tl_ventricle_mr_model_dict = {
     'TL_Ventricle_MR_Baseline_7': 'best_of_ATLAS_Ventricle_MR_Baseline_7',
     'TL_Ventricle_MR_Baseline_8': 'best_of_ATLAS_Ventricle_MR_Baseline_8',
     'TL_Ventricle_MR_Baseline_9': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
-#     'TL_Ventricle_MR_Baseline_9_10SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
-    'TL_Ventricle_MR_Baseline_9_10SAMPLES': 'best_of_ATLAS_Brain_MR_Baseline_9',
+    
+    'TL_Ventricle_MR_Samples10_Baseline_9': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    'TL_Ventricle_MR_Samples20_Baseline_9': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    'TL_Ventricle_MR_Samples50_Baseline_9': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    
     'TL_Ventricle_MR_Baseline_10': 'best_of_ATLAS_Ventricle_MR_Baseline_10',
-    'TL_Ventricle_MR_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11'
+    'TL_Ventricle_MR_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    
+    'TL_Ventricle_MR_Baseline_9_5_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    'TL_Ventricle_MR_Baseline_9_10_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    'TL_Ventricle_MR_Baseline_9_20_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    'TL_Ventricle_MR_Baseline_9_40_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    'TL_Ventricle_MR_Baseline_9_60_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
+    
+    'TL_Ventricle_MR_Baseline_11_5_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_MR_Baseline_11_10_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_MR_Baseline_11_20_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_MR_Baseline_11_40_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_MR_Baseline_11_60_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11'
+    
+    
 }
 
 tl_ventricle_ct_model_dict = {
@@ -281,7 +298,19 @@ tl_ventricle_ct_model_dict = {
     'TL_Ventricle_CT_Baseline_8': 'best_of_ATLAS_Ventricle_MR_Baseline_8',
     'TL_Ventricle_CT_Baseline_9': 'best_of_ATLAS_Ventricle_MR_Baseline_9',
     'TL_Ventricle_CT_Baseline_10': 'best_of_ATLAS_Ventricle_MR_Baseline_10',
-    'TL_Ventricle_CT_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11'
+    'TL_Ventricle_CT_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    
+    'TL_Ventricle_CT_Samples10_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_CT_Samples20_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_CT_Samples50_Baseline_11': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    
+    'TL_Ventricle_CT_Baseline_11_5_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_CT_Baseline_11_10_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_CT_Baseline_11_20_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_CT_Baseline_11_40_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11',
+    'TL_Ventricle_CT_Baseline_11_60_SAMPLES': 'best_of_ATLAS_Ventricle_MR_Baseline_11'
+    
+    
 }
 
 

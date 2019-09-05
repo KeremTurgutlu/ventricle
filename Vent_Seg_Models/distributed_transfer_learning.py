@@ -1,23 +1,16 @@
+######################################################
+###### SCRIPT FOR DISTRIBUTED TRANSFER LEARNING ######
+######################################################
+
 from fastai.vision import *
 from fastai.callbacks import *
 from fastai.script import *
 from fastai.distributed import *
-
 import data_utils
 from data_utils import *
 from models import *
 from learn_utils import *
 
-bn_types = (nn.BatchNorm1d, nn.BatchNorm2d, nn.BatchNorm3d)
-gnorm_types = (nn.GroupNorm,)
-insnorm_types = (nn.InstanceNorm1d, nn.InstanceNorm2d, nn.InstanceNorm3d)
-norm_types = bn_types + gnorm_types + insnorm_types
-
-def cond_init(m:nn.Module, init_func:LayerFunc):
-    "Initialize the non-batchnorm layers of `m` with `init_func`."
-    if (not isinstance(m, norm_types)) and (not isinstance(m, nn.PReLU)) and requires_grad(m): 
-        init_default(m, init_func)
-        
 def annealing_epochs(n_groups, epochs):
     "Generate number of epochs"
     for i in range(n_groups):
@@ -60,7 +53,7 @@ class SaveModelCallback(TrackerCallback):
 def main(
     gpu:Param("GPU to run on", str)=None,
     MODEL_NAME:Param("Name for saving model", str)='TL_Brain_MR_Baseline_10',
-    model_dir:Param("Directory to save model", str)='notl_brain_mr_models',
+    model_dir:Param("Directory to save model", str)='tl_brain_mr_models',
     data_name:Param("data name", str)='notl_brain_mr',
     tl_model_dict_name:Param("dict name for tl data mapping", str)='tl_brain_mr_model_dict',   
     bs:Param("batch size per GPU", int)=2,
@@ -72,7 +65,9 @@ def main(
     early_stop:Param("do early stopping", int)=1,
     clip:Param("do gradient clipping", float)=0.,
     sample_size:Param("Number of samples in training", int)=None,
-    load_dir:Param("directory to load pretrained model", str)='atlas_brain_mr_models'):
+    load_dir:Param("directory to load pretrained model", str)='atlas_brain_mr_models',
+    eps:Param("Adam eps", float)=1e-8, 
+    lsuv:Param("do lsuv init", int)=0):
     
     """Distrubuted training of a given experiment.
     Fastest speed is if you run as follows:
@@ -86,7 +81,9 @@ def main(
     # data
     f = data_dict[data_name]
     train_paths, valid_paths, test1_paths, test2_paths = f()
-    if sample_size: train_paths = [train_paths[0][:sample_size], train_paths[1][:sample_size]]
+    if sample_size:
+        idxs = np.random.choice(range(len(train_paths[0])), size=sample_size, replace=False)
+        train_paths = np.array(train_paths)[:,idxs]
     
     train_ds = MRI_3D_Dataset(*train_paths)
     valid_ds = MRI_3D_Dataset(*valid_paths)
@@ -102,12 +99,11 @@ def main(
     apply_leaf(m, partial(cond_init, init_func= nn.init.kaiming_normal_))
     
     # INFO
-    if not int(gpu): print(f"Training: {MODEL_NAME} Model: {m.__class__} with lr: {lr}")
+    if not int(gpu): print(f"Training: {MODEL_NAME} Model: {m.__class__} Train Size: {len(train_paths[0])}")
         
     # callbacks
     early_stop_cb = partial(EarlyStoppingCallback, monitor='dice_score', mode='max', patience=5)
-    save_model_cb = partial(SaveModelCallback, monitor='dice_score', mode='max', every='improvement', 
-                            name=f'best_of_{MODEL_NAME}')
+    save_model_cb = partial(SaveModelCallback, monitor='dice_score', mode='max', every='improvement',  name=f'best_of_{MODEL_NAME}')
     reduce_lr_cb = partial(ReduceLROnPlateauCallback, monitor='dice_score', mode='max', patience=0, factor=0.8)
     csv_logger_cb = partial(CSVLogger, filename=f'logs/{model_dir}/{MODEL_NAME}')
 
@@ -178,5 +174,56 @@ def main(
     learn.fit_one_cycle(_epochs, slice(lr))
     
    
+    # Evaluate on test
+    from time import time
+    if not gpu:
+        # load best model 
+        learn.load(f'best_of_{MODEL_NAME}')
+        os.makedirs('test_results', exist_ok=True)
+        os.makedirs(f"test_results/{model_dir}", exist_ok=True)
+        os.makedirs(f"test_results/{model_dir}/{MODEL_NAME}", exist_ok=True)
+        
+        bs = 1
+        model = learn.model.eval().to(torch.device(gpu))
+        test1_dl = DeviceDataLoader(DataLoader(test1_ds, batch_size=bs),
+                                    tfms=[batch_to_half], device=torch.device(gpu)) if test1_ds else None
+        test2_dl = DeviceDataLoader(DataLoader(test2_ds, batch_size=bs),
+                                    tfms=[batch_to_half], device=torch.device(gpu)) if test2_ds else None
+
+        # test1
+        inputs = []
+        targets = []
+        for xb, yb in test1_dl:
+            zb = model(xb).detach().cpu(); inputs.append(zb)
+            targets.append(yb.detach().cpu())
+
+        inputs, targets = torch.cat(inputs).float(), torch.cat(targets).float()
+        test1_res = dice_score(inputs, targets).item()
+
+        # test2
+        inputs = []
+        targets = []
+        for xb, yb in test2_dl:
+            zb = model(xb).detach(); inputs.append(zb)
+            targets.append(yb.detach())
+
+        inputs, targets = torch.cat(inputs).float(), torch.cat(targets).float()
+        test2_res = dice_score(inputs, targets).item()
+
+        print(test1_res, test2_res)
+        
+        save_fn = f"test_results/{model_dir}/{MODEL_NAME}/{str(int(time()))}.txt"
+        with open(save_fn, 'w') as f: f.write(str([test1_res, test2_res]))
+
+    else: pass
+
+
+
+
+
+
+
+
+
         
         
