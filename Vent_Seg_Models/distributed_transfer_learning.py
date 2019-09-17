@@ -213,6 +213,7 @@ def main(
         print(test1_res, test2_res)
         
         save_fn = f"test_results/{model_dir}/{MODEL_NAME}/{str(int(time()))}.txt"
+        print(f"saving results to: {save_fn}")
         with open(save_fn, 'w') as f: f.write(str([test1_res, test2_res]))
 
     else: pass
