@@ -163,7 +163,7 @@ def main(
         learn.fit_one_cycle(_epochs, slice(lr))
         best_init = learn.save_model_callback.best
         # TODO: load with opt
-        learn.load(f'best_of_{MODEL_NAME}')
+#         learn.load(f'best_of_{MODEL_NAME}')
         learn.callback_fns = [cb_fn for cb_fn in learn.callback_fns if cb_fn.func == Recorder]
         learn.callback_fns.append(partial(save_model_cb, best_init=best_init))
 
@@ -194,8 +194,8 @@ def main(
         inputs = []
         targets = []
         for xb, yb in test1_dl:
-            zb = model(xb).detach().cpu(); inputs.append(zb)
-            targets.append(yb.detach().cpu())
+            zb = model(xb).detach().cpu(); inputs.append(zb.float())
+            targets.append(yb.detach().cpu().float())
 
         inputs, targets = torch.cat(inputs).float(), torch.cat(targets).float()
         test1_res = dice_score(inputs, targets).item()
