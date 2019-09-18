@@ -1,0 +1,8 @@
+name: ventricle
+channels:
+- fastai
+- pytorch
+dependencies:
+- fastai==1.0.55
+- pytorch==1.0.1
+
