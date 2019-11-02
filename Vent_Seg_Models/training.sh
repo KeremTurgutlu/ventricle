@@ -47,15 +47,14 @@
 # --model_name=baseline5 \
 # --loss_func=dice
 
-# Baseline - 6
-python /home/turgutluk/fastai/fastai/launch.py --gpus=1 ./distributed_training.py \
---MODEL_NAME=NOTL_Brain_MR_Baseline_6 \
---model_dir=notl_brain_mr_models \
---data_name=notl_brain_mr \
---bs=2 \
---model_name=baseline6 \
---loss_func=dice \
---lsuv=0 
+# # Baseline - 6
+# python ../../fastai/fastai/launch.py --gpus=01234567 ./distributed_training.py \
+# --MODEL_NAME=NOTL_Brain_MR_Baseline_6 \
+# --model_dir=notl_brain_mr_models \
+# --data_name=notl_brain_mr \
+# --bs=2 \
+# --model_name=baseline6 \
+# --loss_func=dice
 
 # # Baseline - 7
 # python ../../fastai/fastai/launch.py --gpus=01234567 ./distributed_training.py \
@@ -1330,40 +1329,40 @@ python /home/turgutluk/fastai/fastai/launch.py --gpus=1 ./distributed_training.p
 # --loss_func=dice --lr=0.03 --sample_size=20 \
 # --one_cycle=1 --early_stop=1 --clip=0 --eps=1e-3
 
-# # TL Sample Size = 20
-# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
-# --MODEL_NAME=TL_Ventricle_CT_Samples20_Baseline_11 \
-# --model_dir=tl_ventricle_ct_models \
-# --tl_model_dict=tl_ventricle_ct_model_dict \
-# --data_name=notl_ventricle_ct \
-# --load_dir=atlas_ventricle_mr_models \
-# --bs=1 \
-# --model_name=baseline11 --sample_size=20 --lr=1e-2 \
-# --loss_func=dice \
-# --epochs=20
+# TL Sample Size = 20
+python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
+--MODEL_NAME=TL_Ventricle_CT_Samples20_Baseline_11 \
+--model_dir=tl_ventricle_ct_models \
+--tl_model_dict=tl_ventricle_ct_model_dict \
+--data_name=notl_ventricle_ct \
+--load_dir=atlas_ventricle_mr_models \
+--bs=1 \
+--model_name=baseline11 --sample_size=20 --lr=1e-2 \
+--loss_func=dice \
+--epochs=20
 
 
-# # NOTL Sample Size = 50
-# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_training.py \
-# --MODEL_NAME=NOTL_Ventricle_CT_Samples50_Baseline_11 \
-# --model_dir=notl_ventricle_ct_models \
-# --data_name=notl_ventricle_ct \
-# --bs=1 \
-# --model_name=baseline11 \
-# --loss_func=dice --lr=0.03 --sample_size=50 \
-# --one_cycle=1 --early_stop=1 --clip=0 --eps=1e-3
+# NOTL Sample Size = 50
+python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_training.py \
+--MODEL_NAME=NOTL_Ventricle_CT_Samples50_Baseline_11 \
+--model_dir=notl_ventricle_ct_models \
+--data_name=notl_ventricle_ct \
+--bs=1 \
+--model_name=baseline11 \
+--loss_func=dice --lr=0.03 --sample_size=50 \
+--one_cycle=1 --early_stop=1 --clip=0 --eps=1e-3
 
-# # TL Sample Size = 50
-# python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
-# --MODEL_NAME=TL_Ventricle_CT_Samples50_Baseline_11  \
-# --model_dir=tl_ventricle_ct_models \
-# --tl_model_dict=tl_ventricle_ct_model_dict \
-# --data_name=notl_ventricle_ct \
-# --load_dir=atlas_ventricle_mr_models \
-# --bs=1 \
-# --model_name=baseline11 --sample_size=50 --lr=1e-2 \
-# --loss_func=dice \
-# --epochs=20
+# TL Sample Size = 50
+python ../../fastai/fastai/launch.py --gpus=012345 ./distributed_transfer_learning.py \
+--MODEL_NAME=TL_Ventricle_CT_Samples50_Baseline_11  \
+--model_dir=tl_ventricle_ct_models \
+--tl_model_dict=tl_ventricle_ct_model_dict \
+--data_name=notl_ventricle_ct \
+--load_dir=atlas_ventricle_mr_models \
+--bs=1 \
+--model_name=baseline11 --sample_size=50 --lr=1e-2 \
+--loss_func=dice \
+--epochs=20
 
 
 
