@@ -132,7 +132,6 @@ def main(
     if lsuv: lsuv_init(learn)
     
 
-    #torch.distributed.init_process_group(backend='nccl')
     learn.fit_one_cycle(epochs, max_lr=lr)
     learn.save(f'final_of_{MODEL_NAME}')
 

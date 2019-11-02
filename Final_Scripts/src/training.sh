@@ -48,14 +48,13 @@
 # --loss_func=dice
 
 # Baseline - 6
-python /home/turgutluk/fastai/fastai/launch.py --gpus=1 ./distributed_training.py \
+python /home/turgutluk/fastai/fastai/launch.py --gpus=012 src/distributed_training.py \
 --MODEL_NAME=NOTL_Brain_MR_Baseline_6 \
 --model_dir=notl_brain_mr_models \
 --data_name=notl_brain_mr \
 --bs=2 \
 --model_name=baseline6 \
---loss_func=dice \
---lsuv=0 
+--loss_func=dice
 
 # # Baseline - 7
 # python ../../fastai/fastai/launch.py --gpus=01234567 ./distributed_training.py \
