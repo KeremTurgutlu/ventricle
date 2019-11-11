@@ -29,7 +29,7 @@ if __name__ == '__main__':
             _, ventricle_mask = medim_obj.compute_mask("{Ventricles}", "full", interp=True)
             _, brain_atlas = medim_obj.compute_mask("{BrainAtlas}", "full", interp=True)
             _, ventricle_atlas = medim_obj.compute_mask("{VentriclesAtlas}", "full", interp=True)
-            
+
     
             raw_image = copy.deepcopy(image)
             raw_image = helper.z_pad(raw_image)

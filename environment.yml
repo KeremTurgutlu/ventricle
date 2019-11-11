@@ -7,4 +7,8 @@ dependencies:
 - pytorch==1.0.1
 - pip
 - pip:
+<<<<<<< HEAD
     - ipyexperiments
+=======
+        - ipyexperiments
+>>>>>>> e7319fcaf6f13c490137803db24084987acde497
