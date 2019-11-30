@@ -12,7 +12,7 @@ Main library of the project is a custom forked version of [fastai v2](https://gi
 1) Follow the **Installation** steps in https://dev.fast.ai/ (including `fastai2.medical.imaging`). This installation step suggest creating a new environment, please do so. Let's say we created a new environment called `ventproject`.
 2) Activate environment `conda activate ventproject`. Now we are in that environment.
 3) Clone this project repo 
-4) Clone the custom forked version of ![fastai v2] (https://github.com/KeremTurgutlu/fastai2/tree/extend_medical).
+4) Clone the custom forked version of [fastai v2](https://github.com/KeremTurgutlu/fastai2/tree/extend_medical).
 5) cd into custom fork and do `pip install -e .` this will install that repo as a pip package: `fastai2`
 
 
