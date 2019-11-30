@@ -1,12 +1,14 @@
-# ventricle
+## Weakly Supervised Transfer Learning for Ventricle Segmentation
 
 This is git repo for ventricle segmentation project
 
 
-## prepapre data
+### 1) data preparation
 
-dicom_dir = ''
-output_dir = ''
-python prep_data.py --in_dir=dicom_dir --out_dir=output_dir
+The following command will create ATLAS, MR and CT datasets. Raw dicom files will be read, interpolated, padded and resized.
+
+- Fill `common_io.env` to have correct input and output paths 
+- Run `sh prepare_data.sh`
+
 
 
