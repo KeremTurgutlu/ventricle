@@ -9,11 +9,11 @@ Main library of the project is a custom forked version of [fastai v2](https://gi
 
 ### Setup
 
-1) Follow the **Installation** steps in https://dev.fast.ai/ (including `fastai2.medical.imaging`). This installation step suggest creating a new environment, please do so. Let's say we created a new environment called `ventproject`.
-2) Activate environment `conda activate ventproject`. Now we are in that environment.
-3) Clone this project repo 
-4) Clone the custom forked version of [fastai v2](https://github.com/KeremTurgutlu/fastai2/tree/extend_medical).
-5) cd into custom fork and do `pip install -e .` this will install that repo as a pip package: `fastai2`
+- Follow the **Installation** steps in https://dev.fast.ai/ (including `fastai2.medical.imaging`). This installation step suggest creating a new environment, please do so. Let's say we created a new environment called `ventproject`.
+- Activate environment `conda activate ventproject`. Now we are in that environment.
+- Clone this project repo 
+- Clone the custom forked version of [fastai v2](https://github.com/KeremTurgutlu/fastai2/tree/extend_medical).
+- cd into custom fork and do `pip install -e .` this will install that repo as a pip package: `fastai2`
 
 
 ### Configs
@@ -42,21 +42,21 @@ In this project a technique called `literate programming` is used, meaning that 
 
 In this project you have the option to either use the notebooks or the scripts!
 
-`0) scriptrunner.ipynb`: Implements utilities for running scripts in notebook env
+- `0) scriptrunner.ipynb`: Implements utilities for running scripts in notebook env
 
-`1a) dicom to tensor.ipynb`: Read DICOM data, resample, crop-pad and save. (has script)
+- `1a) dicom to tensor.ipynb`: Read DICOM data, resample, crop-pad and save. (has script)
 
-`1b) skull strip.ipynb`: Skull strip data. (has script)
+- `1b) skull strip.ipynb`: Skull strip data. (has script)
 
-`1c) normalization.ipynb`: Normalize data to (0-1) scale for training. (has script)
+- `1c) normalization.ipynb`: Normalize data to (0-1) scale for training. (has script)
 
-`2) datasource.ipynb`: Defines fastai v2 `DataSource`
+- `2) datasource.ipynb`: Defines fastai v2 `DataSource`
 
-`3a) trainutils.ipynb`: Implements training utilities
+- `3a) trainutils.ipynb`: Implements training utilities
 
-`3b) traindenovo.ipynb`: End-to-end training for de novo mode (has script)
+- `3b) traindenovo.ipynb`: End-to-end training for de novo mode (has script)
 
-`3c) traintransfer.ipynb`: End-to-end training for weakly supervised transfer learning (has script)
+- `3c) traintransfer.ipynb`: End-to-end training for weakly supervised transfer learning (has script)
 
 ### Scripts
 
