@@ -41,7 +41,7 @@ In this project you have the option to either use the notebooks or the scripts!
 
 ### Scripts
 
-If you want to only run scripts you can do so by going into notebooks which (has script) and go down to part which is titled **script**. 
+Will be explained... 
 
 
 ### Configs
