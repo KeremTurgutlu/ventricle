@@ -24,12 +24,19 @@ In this project a technique called `literate programming` is used, meaning that 
 In this project you have the option to either use the notebooks or the scripts!
 
 `0) scriptrunner.ipynb`: Implements utilities for running scripts in notebook env
+
 `1a) dicom to tensor.ipynb`: Read DICOM data, resample, crop-pad and save. (has script)
+
 `1b) skull strip.ipynb`: Skull strip data. (has script)
+
 `1c) normalization.ipynb`: Normalize data to (0-1) scale for training. (has script)
+
 `2) datasource.ipynb`: Defines fastai v2 `DataSource`
+
 `3a) trainutils.ipynb`: Implements training utilities
+
 `3b) traindenovo.ipynb`: End-to-end training for de novo mode (has script)
+
 `3c) traintransfer.ipynb`: End-to-end training for weakly supervised transfer learning (has script)
 
 ### Scripts
