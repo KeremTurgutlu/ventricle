@@ -22,7 +22,7 @@ In this project you will need to have two `yaml` config files one for preparing 
 
 `data.yaml`: It is needed as we share raw DICOM images and this configuration will allow you to define where to read and where to write. It also will have csv metadata for each modality which has `train`, `valid`, `test1` and `test2` split information for each `StudyInstanceUID`.
 
-`transfer_learning.yaml`: Here we define transfer learning model to pretrained model mappings for a given `TASK - MODALITY` combination. This is customizable depending on whic of the pretrained models you trained so far. By default all of our experiments left in this file.
+`transfer_learning.yaml`: Here we define transfer learning model to pretrained model mappings for a given `TASK - MODALITY` combination. This is customizable depending on which of the pretrained models you trained locally so far. By default all of our experiments left in this file.
 
 **Important**
 
