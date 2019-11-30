@@ -62,8 +62,9 @@ In this project you have the option to either use the notebooks or the scripts!
 
 Will be explained... 
 
+### How to modify code to try new things!
 
-
+Will be explained... 
 
 
 
