@@ -3,7 +3,7 @@
 
 In this repo you will find notebooks and scripts which will allow you to find all the code necessary to replicate the experiments conducted in this project. This v2 version aims to be as simple as possible in terms of code readability and project structure. Improvements, suggestions and feedback are welcome.
 
-Main library of the project is a custom forked version of ![fastai v2] (https://github.com/KeremTurgutlu/fastai2/tree/extend_medical). Initially original code for experiments were written in a older version of PyTorch and Fast.ai. With this migration the code is now more organized and faster for mass consumption. Workflow adapted in this repo is pretty generic and potentially be used for other similar projects with different data or task with minimal changes.
+Main library of the project is a custom forked version of [fastai v2] (https://github.com/KeremTurgutlu/fastai2/tree/extend_medical). Initially original code for experiments were written in a older version of PyTorch and Fast.ai. With this migration the code is now more organized and faster for mass consumption. Workflow adapted in this repo is pretty generic and potentially be used for other similar projects with different data or task with minimal changes.
 
 
 
@@ -31,6 +31,10 @@ In this project you have the option to either use the notebooks or the scripts!
 `3a) trainutils.ipynb`: Implements training utilities
 `3b) traindenovo.ipynb`: End-to-end training for de novo mode (has script)
 `3c) traintransfer.ipynb`: End-to-end training for weakly supervised transfer learning (has script)
+
+### Scripts
+
+If you want to only run scripts you can do so by going into notebooks which (has script) and go down to part which is titled **script**. 
 
 
 ### Configs
