@@ -46,7 +46,7 @@ def _normalize_skull_stripped_images_and_save(o):
 
 #Cell
 import yaml
-with open(os.environ.get('YAML_PATH', '../data.yaml')) as f: io = yaml.load(f.read(), yaml.FullLoader)
+with open(os.environ.get('YAML_DATA', '../data.yaml')) as f: io = yaml.load(f.read(), yaml.FullLoader)
 
 output_paths = types.SimpleNamespace(
     ATLAS=io['output']['ATLAS'],

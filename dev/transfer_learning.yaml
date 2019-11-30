@@ -1,10 +1,9 @@
-# TASK : MODALITY : MODEL NAME : PRETRAINED NAME
+# TASK : MODALITY : MODEL NAME : PRETRAINED MODEL NAME
 
 BRAIN:
     MR:
         TL_Brain_MR_Baseline_1: best_of_ATLAS_Brain_MR_Baseline_1
     
-        
 
 
 

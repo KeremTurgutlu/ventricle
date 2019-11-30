@@ -13,7 +13,7 @@ from fastai2.vision import *
 
 #Cell
 import yaml
-with open(os.environ.get('YAML_PATH', '../data.yaml')) as f: io = yaml.load(f.read(), yaml.FullLoader)
+with open(os.environ.get('YAML_DATA', '../data.yaml')) as f: io = yaml.load(f.read(), yaml.FullLoader)
 
 data_paths = types.SimpleNamespace(
     ATLAS=io['output']['ATLAS'],
@@ -90,7 +90,7 @@ datasource_dict['notl_ventricle_ct']  = get_notl_ventricle_ct_dsource
 
 #Cell
 def atlas_tfm_image_pt(o): return o.parent/(o.name + "_image_normalized.pt")
-def atlas_tfm_brain_mask_pt(o,): return o.parent/(o.name + "_brain_mask.pt")
+def atlas_tfm_brain_mask_pt(o): return o.parent/(o.name + "_brain_mask.pt")
 def atlas_tfm_skull_stripped_image_pt(o): return o.parent/(o.name + "_skull_stripped_image_normalized.pt")
 def atlas_tfm_ventricles_mask_pt(o): return o.parent/(o.name + "_ventricles_mask.pt")
 
@@ -136,5 +136,5 @@ get_atlas_ventricle_mr_dsource = partial(create_atlas_dsource, data_paths.ATLAS,
                                                   atlas_tfm_ventricles_mask_pt)
 
 #Cell
-datasource_dict['atlas_ventricle_mr'] = get_atlas_brain_mr_dsource
 datasource_dict['atlas_brain_mr'] = get_atlas_ventricle_mr_dsource
+datasource_dict['atlas_ventricle_mr'] = get_atlas_brain_mr_dsource

@@ -87,25 +87,25 @@ experiment_model_dict = {
   ## SPLIT FUNCS ##
 ####################
 
-def _baseline1_split(m:nn.Module): return (nn.ModuleList([m.downblocks,m.middle]), 
+def _baseline1_split(m:nn.Module): return L(nn.ModuleList([m.downblocks,m.middle]), 
                                            m.upblocks,
-                                           m.conv_final)
+                                           m.conv_final).map(params)
 
-def _baseline6_split(m:nn.Module): return (m.layers[:4], m.layers[4:6], m.layers[7:])
+def _baseline6_split(m:nn.Module): return L(m.layers[:4], m.layers[4:6], m.layers[7:]).map(params)
 
 # def _baseline8_split(m:nn.Module): return (nn.ModuleList([m.downblocks, m.middle]),
 #                                             m.upblocks[:3],
 #                                             m.upblocks[3:],
 #                                             m.conv_final)
 
-def _baseline8_split(m:nn.Module): return (nn.ModuleList([m.downblocks, m.middle]),
+def _baseline8_split(m:nn.Module): return L(nn.ModuleList([m.downblocks, m.middle]),
                                             m.upblocks[:3],
-                                            nn.ModuleList([m.upblocks[3:], m.conv_final]))
+                                            nn.ModuleList([m.upblocks[3:], m.conv_final])).map(params)
 
-def _baseline10_split(m:nn.Module): return (nn.ModuleList([m.down1, m.down2, m.down3, m.down4]),
+def _baseline10_split(m:nn.Module): return L(nn.ModuleList([m.down1, m.down2, m.down3, m.down4]),
                                            nn.ModuleList([m.middle, m.upblock1]),
                                            nn.ModuleList([m.upblock2, m.upblock3, m.seg2, m.seg3, m.seg_final])
-                                          )
+                                          ).map(params)
 
 model_split_dict = {
     'baseline1': _baseline1_split,

@@ -154,7 +154,7 @@ def _crop_pad_save(o, targ_sz):
 
 #Cell
 import yaml
-with open(os.environ.get('YAML_PATH', '../data.yaml')) as f: io = yaml.load(f.read(), yaml.FullLoader)
+with open(os.environ.get('YAML_DATA', '../data.yaml')) as f: io = yaml.load(f.read(), yaml.FullLoader)
 
 input_paths = types.SimpleNamespace(
     ATLAS_PATH=io['input']['ATLAS_PATH'],
