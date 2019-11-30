@@ -38,7 +38,7 @@ This can be done during conda environment initialisation as [here](https://stack
 
 ### Notebooks
 
-In this project a technique called `literate programming` is used, meaning that most of the source code (80%) is generated using jupyter notebooks. This allows interactivity, fast develop and transparency for the users.
+In this project a technique called `literate programming` is used, meaning that most of the source code (80%) is generated using jupyter notebooks. This allows interactivity, fast development and transparency for the users.
 
 In this project you have the option to either use the notebooks or the scripts!
 
