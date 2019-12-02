@@ -154,20 +154,21 @@ def _crop_pad_save(o, targ_sz):
 
 #Cell
 import yaml
-with open(os.environ.get('YAML_DATA', '../data.yaml')) as f: io = yaml.load(f.read(), yaml.FullLoader)
+with open(os.environ.get('YAML_DATA', '../data.yaml')) as f: data_config = yaml.load(f.read(), yaml.FullLoader)
 
+# define input and output paths
 input_paths = types.SimpleNamespace(
-    ATLAS_PATH=io['input']['ATLAS_PATH'],
-    MR_PATH=io['input']['MR_PATH'],
-    CT_PATH=io['input']['CT_PATH'],
-    MR_TEST2_PATH=io['input']['MR_TEST2_PATH'],
-    CT_TEST2_PATH=io['input']['CT_TEST2_PATH'],
+    ATLAS_PATH=data_config['input']['ATLAS_PATH'],
+    MR_PATH=data_config['input']['MR_PATH'],
+    CT_PATH=data_config['input']['CT_PATH'],
+    MR_TEST2_PATH=data_config['input']['MR_TEST2_PATH'],
+    CT_TEST2_PATH=data_config['input']['CT_TEST2_PATH'],
 )
 
 output_paths = types.SimpleNamespace(
-    ATLAS=io['output']['ATLAS'],
-    MR=io['output']['MR'],
-    CT=io['output']['CT'])
+    ATLAS=data_config['output']['ATLAS'],
+    MR=data_config['output']['MR'],
+    CT=data_config['output']['CT'])
 
 #Cell
 from time import perf_counter

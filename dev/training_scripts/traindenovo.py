@@ -1,6 +1,9 @@
 #export
-import sys
-sys.path.insert(0, "/home/turgutluk/Vent_Seg_Project/dev/")
+from fastai2.notebook.core import *
+import sys, os
+
+# add local/ package to python path to allow script to access py modules
+if not IN_NOTEBOOK: sys.path.insert(0, os.path.abspath("."))
 
 #export
 from fastai2.vision.all import *
@@ -13,7 +16,6 @@ from local.trainutils import *
 from fastai2.callback.all import *
 from fastai2.distributed import *
 from time import time
-import yaml
 
 #export
 @contextmanager
@@ -55,14 +57,11 @@ def main(
     data_name:Param("Data name for experiment", str)="notl_brain_mr",
     sample_size:Param("Random samples for training, default None - full", int)=None,
     seed:Param("Random seed for sample_size", int)=None,
-    bs:Param("Batch size for training", int)=2,
+    bs:Param("Batch size for training", int)=4,
     model_name:Param("Model architecture config - baseline*", str)="baseline1",
-    MODEL_NAME:Param("Model name to save the model", str)="TL_Brain_MR_Baseline_1",
-    model_dir:Param("Directory to save model", str)="tl_brain_mr_models",
+    MODEL_NAME:Param("Model name to save the model", str)="NOTL_Brain_MR_Baseline_1",
+    model_dir:Param("Directory to save model", str)="notl_brain_mr_models",
     loss_func:Param("Loss function for training", str)='dice',
-    TASK:Param("Task defined for transfer learning in tl.yaml", str)='BRAIN',
-    MODALITY:Param("Modality defined for transfer learning in tl.yaml", str)='MR',
-    tl_model_path:Param("Relative model path", str)="atlas_brain_mr_models/ATLAS_Brain_MR_Baseline_1", 
     eps:Param("Eps value for Adam optimizer", float)=1e-8,
     epochs:Param("Number of epochs for training", int)=2,
     lr:Param("Learning rate for training", float)=0.1):
@@ -93,46 +92,26 @@ def main(
     callbacks = [TerminateOnNaNCallback(), save_model_cb]        
     
     # learn
-    split_func = model_split_dict[model_name]
     lf = loss_dict[loss_func]
     opt_func = partial(Adam, eps=eps)
     learn = Learner(dbunch, m, lf, metrics=[dice_score], opt_func=opt_func,
-                    path=Path('experiments'),
-                    model_dir=Path(model_dir)/MODEL_NAME, cbs=callbacks, splitter=split_func)
+                    path=Path('experiments')/model_dir, model_dir=MODEL_NAME, cbs=callbacks)
     learn.to_fp16()
 
-    # load pretrained
-    with open(os.environ.get('YAML_TL', 'transfer_learning.yaml')) as f: 
-        tl = yaml.load(f.read(), yaml.FullLoader)
-    path, model_dir = learn.path, learn.model_dir
-    tl_model_name = tl[TASK][MODALITY][MODEL_NAME]
-    learn.path, learn.model_dir = path, tl_model_path
-    learn.load(tl_model_name);
-    learn.path, learn.model_dir = path, model_dir
-    
     # distributed
     if gpu is None:       learn.to_parallel()
     elif num_distrib()>1: learn.to_distributed(gpu)    
-
-    # fine tuning - transfer learning
-    n_groups = len(learn.opt.param_groups)
-    tl_epochs = array([epochs]*n_groups)//np.power(2, array(list(range(n_groups))))
-    tl_epochs = np.clip(tl_epochs,1,np.inf).astype(int)
-    for i, _epochs in zip(range(1, n_groups+1), tl_epochs):
-        if not int(gpu): print(f"Freezing to param group: {-i} and training for {_epochs} epochs")
-        learn.freeze_to(-i)
-        learn.fit_one_cycle(_epochs, slice(lr), cbs=callbacks)
     
+    # fit
+    learn.fit_one_cycle(epochs, lr_max=lr)
 
-
-    # evaluate
-    learn.load(f'best_of_{MODEL_NAME}');
-    learn.cbs = [cb for cb in learn.cbs if not isinstance(cb, TrackerCallback) and
-                                           not isinstance(cb, TerminateOnNaNCallback)]
-    if not gpu_rank:
-        if len(dbunch.dls) == 4: 
-            test1_eval, test2_eval = learn.validate(2), learn.validate(3)
-            eval_dir = f"test_results/{model_dir}"
+    # load best model and evaluate
+    learn.load(f'best_of_{MODEL_NAME}')
+    learn.cbs = [cb for cb in learn.cbs if not isinstance(cb, TrackerCallback)]
+    if len(dbunch.dls) == 4: 
+        test1_eval, test2_eval = learn.validate(2), learn.validate(3)
+        if not gpu_rank:
+            eval_dir = f"test_results/{model_dir}/{MODEL_NAME}"
             os.makedirs(eval_dir, exist_ok=True)
             save_fn = f"{eval_dir}/{str(int(time()))}.txt"
             with open(save_fn, 'w') as f: f.write(str([test1_eval, test2_eval]))

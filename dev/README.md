@@ -28,24 +28,29 @@ In general if you check `data.yaml` shared in this repo you will have a good ide
 
 - **input:** Defines the input locations for raw DICOM data. Please enter absolute path for:
 
+```
     - ATLAS_PATH: Absolute path for `PICARE_BMETS_Raw_DICOM_Files`
     - MR_PATH: Absolute path for `PICARE_SEGMENTATION_BRAINVENT_MR_V1`
     - CT_PATH: Absolute path for `Training_CT_Raw_DICOM_Files`
     - MR_TEST2_PATH: Absolute path for `Testing_MR_Raw_DICOM_Files`
     - CT_TEST2_PATH: Absolute path for `Testing_CT_Raw_DICOM_Files`
+```
 
 - **output:** Defines where the processed DICOM data will be saved, e.g. pytorch tensors for training. It's good to have the following under the same parent directory, e.g. something like `{somepath}/ventproject_data`
 
+```
     - ATLAS: Absolute path for processed atlas data
     - MR: Absolute path for processed mr data
     - CT: Absolute path for processed mr data
+```
 
 - **csv_splits:** Defines where the csv split data is located. These csv files are again shared by us. They have train, valid, test1 and test2 information.
 
+```
     - ATLAS:  Absolute path for `atlas_splits_df.csv`
     - MR:  Absolute path for `mr_splits_df.csv`
     - CT:  Absolute path for `ct_splits_df.csv`
-
+```
 
 `transfer_learning.yaml`: Here we define transfer learning model to pretrained model mappings for a given `TASK - MODALITY` combination. This is customizable depending on which of the pretrained models you trained locally so far. By default all of our original mappings are left in this file to give an example.
 
@@ -76,25 +81,27 @@ In this project you have the option to either use the notebooks or the scripts!
 
 - `0) scriptrunner.ipynb`: Implements utilities for running scripts in notebook env. Better left as is.
 
-- `1a) dicom to tensor.ipynb`: Read DICOM data, resample, crop-pad and save. (has script)
+- `1a) dicom to tensor.ipynb`: Read DICOM data, resample, crop-pad and save. (has a runnable script)
 
-- `1b) skull strip.ipynb`: Skull strip data. (has script)
+- `1b) skull strip.ipynb`: Skull strip data. (has a runnable script)
 
-- `1c) normalization.ipynb`: Normalize data to (0-1) scale for training. (has script)
+- `1c) normalization.ipynb`: Normalize data to (0-1) scale for training. (has a runnable script)
 
-- `2) datasource.ipynb`: Defines fastai v2 `DataSource`
+- `2) datasource.ipynb`: Defines fastai v2 `DataSource` (python module)
 
-- `3a) trainutils.ipynb`: Implements training utilities
+- `3a) trainutils.ipynb`: Implements training utilities (python module)
 
-- `3b) traindenovo.ipynb`: End-to-end training for de novo mode (has script)
+- `3b) traindenovo.ipynb`: End-to-end training for de novo mode  (has a runnable script)
 
-- `3c) traintransfer.ipynb`: End-to-end training for weakly supervised transfer learning (has script)
+- `3c) traintransfer.ipynb`: End-to-end training for weakly supervised transfer learning (has a runnable script)
 
 
 
 ### Scripts
 
-If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes. Notebook generated python scripts are located in `local/` with other python modules, training scripts are located in `scripts/` and bash scripts are located in `bash_scripts/`.
+If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes. Notebook generated python scripts are located in `local/` with other python modules, training scripts are located in `training_scripts/` and bash scripts are located in `bash_scripts/`.
+
+### Data Prep
 
 ### 1) Read -> Convert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save
 
@@ -122,18 +129,29 @@ Simply run `sh ./normalize.sh` from same directory where `normalize.sh` script i
 Logs for this run will be put in `.log/normalize.log` file
 
 
+### 4) All data preparation in one go
+
+Optionally you can run `sh ./preparedata.sh` from same directory where `preparedata.sh` script is located to run steps 1-2-3 in one go.
 
 
+
+
+### Training
+
+For detailed explanation for arguments that can be passed to training scripts please go to `training_scripts/` and read `README.md`. When either `traindenovo,py` or `traintransfer.py` executed an `experiments` folder will be created and all generated model files will saved in it according to defined model paths and names.
+
+### 1) Training in De Novo (from Scratch) Mode
+
+This part is where we can train `ATLAS` pretrained models from scratch as well as `NOTL CT` or `NOTL MR` models for both `BRAIN` and `VENTRICLE` tasks. 
+
+### 2) Training in Weakly Supervised Transfer Learning Mode
+
+This part is where we can finetune `CT` and `MR` models for both `BRAIN` and `VENTRICLE` tasks using pretrained `ATLAS` models.
 
 
 ### How to modify code to try new things!
 
 Will be explained... 
-
-
-
-
-
 
 
 
