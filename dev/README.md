@@ -38,16 +38,19 @@ In general if you check `data.yaml` shared in this repo you will have a good ide
 
 - **output:** Defines where the processed DICOM data will be saved, e.g. pytorch tensors for training. It's good to have the following under the same parent directory, e.g. something like `{somepath}/ventproject_data`
 
+```
     - ATLAS: Absolute path for processed atlas data
     - MR: Absolute path for processed mr data
     - CT: Absolute path for processed mr data
+```
 
 - **csv_splits:** Defines where the csv split data is located. These csv files are again shared by us. They have train, valid, test1 and test2 information.
 
+```
     - ATLAS:  Absolute path for `atlas_splits_df.csv`
     - MR:  Absolute path for `mr_splits_df.csv`
     - CT:  Absolute path for `ct_splits_df.csv`
-
+```
 
 `transfer_learning.yaml`: Here we define transfer learning model to pretrained model mappings for a given `TASK - MODALITY` combination. This is customizable depending on which of the pretrained models you trained locally so far. By default all of our original mappings are left in this file to give an example.
 
