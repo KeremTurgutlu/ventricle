@@ -40,7 +40,7 @@ In general if you check `data.yaml` shared in this repo you will have a good ide
     - MR: Absolute path for processed mr data
     - CT: Absolute path for processed mr data
 
-**output:** Defines where the csv split data is located. These csv files are again shared by us. They have train, valid, test1 and test2 information.
+**csv_splits:** Defines where the csv split data is located. These csv files are again shared by us. They have train, valid, test1 and test2 information.
 
     - ATLAS:  Absolute path for `atlas_splits_df.csv`
     - MR:  Absolute path for `mr_splits_df.csv`
@@ -64,7 +64,7 @@ Whenever you run any script or notebook two environment variables should be set:
 
 This can be done during conda environment initialisation as [here](https://stackoverflow.com/questions/31598963/how-to-set-specific-environment-variables-when-activating-conda-environment)
 
-In notebooks you will see section **set `data.yaml`** where this is applicable. For scripts these environemnt variables should be set properly before calling them.
+In notebooks you will see section **set `data.yaml`** where this is applicable. For scripts these environemnt variables should be set properly before calling them in the same shell environment.
 
 
 
@@ -98,11 +98,32 @@ If you don't want to prepare data using notebooks you use scripts instead that w
 
 ### 1) Read -> Conert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save
 
-Instead of running `[notebook run]` cells in `1a) dicom to tensor.ipynb` notebook you can use this `dicom2tensor.sh` bash script to prepare data. As you can understand from the title the following lines of code will `Read -> Conert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save` data according to input and output paths defined in `data.yaml`.
+Instead of running `[notebook run]` cells in `1a) dicom to tensor.ipynb` notebook you can use `dicom2tensor.sh` bash script to prepare data. As you may understand from the title this script will `Read -> Conert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save` data according to input and output paths defined in `data.yaml`.
 
-Simply run `sh ./dicom2tensor.sh` from same directory where `dicom2tesnsor` script is located.
+Simply run `sh ./dicom2tensor.sh` from same directory where `dicom2tesnsor.sh` script is located.
 
-Logs for this run will be put in `.log` folder
+Logs for this run will be put in `.log/dicom2tensor.log` file
+
+### 2) Read -> Skull Strip -> Save
+
+Instead of running `[notebook run]` cells in `1b) skull strip.ipynb` notebook you can use this `skullstrip.sh` bash script to prepare data. As you may understand from the title this script will `Read -> Skull Strip -> Save` data according to output paths defined in `data.yaml`.
+
+Simply run `sh ./skullstrip.sh` from same directory where `skullstrip.sh` script is located.
+
+Logs for this run will be put in `.log/skullstrip.log` file
+
+
+### 3) Read -> Normalize -> Save
+
+Instead of running `[notebook run]` cells in `1c) normalization` notebook you can use this `normalize.sh` bash script to prepare data. As you may understand from the title this script will `Read -> Normalize -> Save` data according to output paths defined in `data.yaml`.
+
+Simply run `sh ./normalize.sh` from same directory where `normalize.sh` script is located.
+
+Logs for this run will be put in `.log/normalize.log` file
+
+
+
+
 
 
 ### How to modify code to try new things!
