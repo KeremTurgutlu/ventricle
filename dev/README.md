@@ -26,7 +26,7 @@ In this project you will need to have two `yaml` config files in `configs/` one 
 
 In general if you check `data.yaml` shared in this repo you will have a good idea on how to fill it jut by looking at it.
 
-**input:** Defines the input locations for raw DICOM data. Please enter absolute path for:
+- **input:** Defines the input locations for raw DICOM data. Please enter absolute path for:
 
     - ATLAS_PATH: Absolute path for `PICARE_BMETS_Raw_DICOM_Files`
     - MR_PATH: Absolute path for `PICARE_SEGMENTATION_BRAINVENT_MR_V1`
@@ -34,13 +34,13 @@ In general if you check `data.yaml` shared in this repo you will have a good ide
     - MR_TEST2_PATH: Absolute path for `Testing_MR_Raw_DICOM_Files`
     - CT_TEST2_PATH: Absolute path for `Testing_CT_Raw_DICOM_Files`
 
-**output:** Defines where the processed DICOM data will be saved, e.g. pytorch tensors for training. It's good to have the following under the same parent directory, e.g. something like `{somepath}/ventproject_data`
+- **output:** Defines where the processed DICOM data will be saved, e.g. pytorch tensors for training. It's good to have the following under the same parent directory, e.g. something like `{somepath}/ventproject_data`
 
     - ATLAS: Absolute path for processed atlas data
     - MR: Absolute path for processed mr data
     - CT: Absolute path for processed mr data
 
-**csv_splits:** Defines where the csv split data is located. These csv files are again shared by us. They have train, valid, test1 and test2 information.
+- **csv_splits:** Defines where the csv split data is located. These csv files are again shared by us. They have train, valid, test1 and test2 information.
 
     - ATLAS:  Absolute path for `atlas_splits_df.csv`
     - MR:  Absolute path for `mr_splits_df.csv`
