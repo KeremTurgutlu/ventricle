@@ -28,11 +28,13 @@ In general if you check `data.yaml` shared in this repo you will have a good ide
 
 - **input:** Defines the input locations for raw DICOM data. Please enter absolute path for:
 
+```
     - ATLAS_PATH: Absolute path for `PICARE_BMETS_Raw_DICOM_Files`
     - MR_PATH: Absolute path for `PICARE_SEGMENTATION_BRAINVENT_MR_V1`
     - CT_PATH: Absolute path for `Training_CT_Raw_DICOM_Files`
     - MR_TEST2_PATH: Absolute path for `Testing_MR_Raw_DICOM_Files`
     - CT_TEST2_PATH: Absolute path for `Testing_CT_Raw_DICOM_Files`
+```
 
 - **output:** Defines where the processed DICOM data will be saved, e.g. pytorch tensors for training. It's good to have the following under the same parent directory, e.g. something like `{somepath}/ventproject_data`
 
