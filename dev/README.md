@@ -138,25 +138,20 @@ Optionally you can run `sh ./preparedata.sh` from same directory where `prepared
 
 ### Training
 
-For detailed explanation for arguments that can be passed to training scripts please go to `training_scripts/` and read `README.md`.
+For detailed explanation for arguments that can be passed to training scripts please go to `training_scripts/` and read `README.md`. When either `traindenovo,py` or `traintransfer.py` executed an `experiments` folder will be created and all generated model files will saved in it according to defined model paths and names.
 
 ### 1) Training in De Novo (from Scratch) Mode
 
 This part is where we can train `ATLAS` pretrained models from scratch as well as `NOTL CT` or `NOTL MR` models for both `BRAIN` and `VENTRICLE` tasks. 
 
+### 2) Training in Weakly Supervised Transfer Learning Mode
 
-
-
+This part is where we can finetune `CT` and `MR` models for both `BRAIN` and `VENTRICLE` tasks using pretrained `ATLAS` models.
 
 
 ### How to modify code to try new things!
 
 Will be explained... 
-
-
-
-
-
 
 
 
