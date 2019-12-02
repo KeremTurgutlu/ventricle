@@ -64,7 +64,7 @@ Whenever you run any script or notebook two environment variables should be set:
 
 This can be done during conda environment initialisation as [here](https://stackoverflow.com/questions/31598963/how-to-set-specific-environment-variables-when-activating-conda-environment)
 
-In notebooks where you will see section **set `data.yaml`** where this is applicable.
+In notebooks you will see section **set `data.yaml`** where this is applicable. For scripts these environemnt variables should be set properly before calling them.
 
 
 
@@ -90,9 +90,18 @@ In this project you have the option to either use the notebooks or the scripts!
 
 - `3c) traintransfer.ipynb`: End-to-end training for weakly supervised transfer learning (has script)
 
+
+
 ### Scripts
 
-Will be explained... 
+If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes.
+
+#### Read -> Conert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save
+
+- `dicom2tensor.sh`: Instead of running `1a) dicom to tensor.ipynb` you can use this bash script to prepare training data. As you can understand from the title the following lines of code will `Read -> Conert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save` data according to input and output paths defined in `data.yaml`.
+
+
+
 
 ### How to modify code to try new things!
 
