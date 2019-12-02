@@ -94,7 +94,7 @@ In this project you have the option to either use the notebooks or the scripts!
 
 ### Scripts
 
-If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes. Notebook generated python scripts are located in `local/` with other python modules, training scripts are located in `scripts` and bash scripts are located in `bash_scripts`.
+If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes. Notebook generated python scripts are located in `local/` with other python modules, training scripts are located in `scripts/` and bash scripts are located in `bash_scripts/`.
 
 ### 1) Read -> Convert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save
 
