@@ -1,4 +1,11 @@
 #export
+from fastai2.notebook.core import *
+import sys, os
+
+# add local/ package to python path to allow script to access py modules
+if not IN_NOTEBOOK: sys.path.insert(0, os.path.abspath("."))
+
+#export
 from fastai2.vision.all import *
 from fastai2.data.all import *
 from local.datasource import *

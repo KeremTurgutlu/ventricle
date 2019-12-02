@@ -1,6 +1,9 @@
 #export
-import sys
-sys.path.insert(0, "/home/turgutluk/Vent_Seg_Project/dev/")
+from fastai2.notebook.core import *
+import sys, os
+
+# add local/ package to python path to allow script to access py modules
+if not IN_NOTEBOOK: sys.path.insert(0, os.path.abspath("."))
 
 #export
 from fastai2.vision.all import *
@@ -126,11 +129,11 @@ def main(
 
 
     # evaluate
-    learn.load(f'best_of_{MODEL_NAME}');
-    learn.cbs = [cb for cb in learn.cbs if not isinstance(cb, TrackerCallback) and
-                                           not isinstance(cb, TerminateOnNaNCallback)]
     if not gpu_rank:
         if len(dbunch.dls) == 4: 
+            learn.load(f'best_of_{MODEL_NAME}');
+            learn.cbs = [cb for cb in learn.cbs if not isinstance(cb, TrackerCallback) and
+                                               not isinstance(cb, TerminateOnNaNCallback)]        
             test1_eval, test2_eval = learn.validate(2), learn.validate(3)
             eval_dir = f"test_results/{model_dir}"
             os.makedirs(eval_dir, exist_ok=True)

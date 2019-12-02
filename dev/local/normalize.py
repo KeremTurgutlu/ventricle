@@ -46,7 +46,7 @@ def _normalize_skull_stripped_images_and_save(o):
 
 #Cell
 import yaml
-with open(os.environ.get('YAML_DATA', '../data.yaml')) as f: io = yaml.load(f.read(), yaml.FullLoader)
+with open(os.environ.get('YAML_DATA', '../data.yaml')) as f: data_config = yaml.load(f.read(), yaml.FullLoader)
 
 # define input and output paths
 input_paths = types.SimpleNamespace(
