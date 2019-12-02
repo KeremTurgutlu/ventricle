@@ -96,7 +96,7 @@ In this project you have the option to either use the notebooks or the scripts!
 
 If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes.
 
-### 1) Read -> Conert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save
+### 1) Read -> Convert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save
 
 Instead of running `[notebook run]` cells in `1a) dicom to tensor.ipynb` notebook you can use `dicom2tensor.sh` bash script to prepare data. As you may understand from the title this script will `Read -> Conert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save` data according to input and output paths defined in `data.yaml`.
 
