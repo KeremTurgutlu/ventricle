@@ -18,11 +18,11 @@ Main library of the project is a custom forked version of [fastai v2](https://gi
 
 ### Configs
 
-In this project you will need to have two `yaml` config files one for preparing data and one for defining transfer learned to pretrained model mapping. 
+In this project you will need to have two `yaml` config files in `configs/` one for preparing data and one for defining transfer learned to pretrained model mapping. 
 
 `data.yaml`: It is needed as we share raw DICOM images and this configuration will allow you to define where to read and where to write. It also will have csv metadata for each modality which has `train`, `valid`, `test1` and `test2` split information for each `StudyInstanceUID`.
 
-### How to fill `data.yaml`
+#### How to fill `data.yaml`
 
 In general if you check `data.yaml` shared in this repo you will have a good idea on how to fill it jut by looking at it.
 
@@ -49,7 +49,7 @@ In general if you check `data.yaml` shared in this repo you will have a good ide
 
 `transfer_learning.yaml`: Here we define transfer learning model to pretrained model mappings for a given `TASK - MODALITY` combination. This is customizable depending on which of the pretrained models you trained locally so far. By default all of our original mappings are left in this file to give an example.
 
-### How to fill `transfer_learning.yaml`
+#### How to fill `transfer_learning.yaml`
 
 Once you pretrain atlas models you can go ahead to define `transfer_learning.yaml` to define transfer learned models to pretrained models mapping for a given task (BRAIN/VENTRICLE) and modality (MR/CT) pair. You can notice from the shared `tansfer_learning.yaml` file in this repo that we map transfer learning experiment name `TL_Brain_MR_Baseline_1` to a pretrained model name `best_of_ATLAS_Brain_MR_Baseline_1` which should be located somewhere as a pretrained pytorch model file as `best_of_ATLAS_Brain_MR_Baseline_1.pth`
 
@@ -59,8 +59,8 @@ If you follow either the notebooks or the scripts you can get a good understandi
 
 Whenever you run any script or notebook two environment variables should be set:
 
-- `YAML_DATA`: Absolute path to `data.yaml`
-- `YAML_TL`: Absolute path to `transfer_learning.yaml`
+- `YAML_DATA`: Absolute path to `configs/data.yaml`
+- `YAML_TL`: Absolute path to `configs/transfer_learning.yaml`
 
 This can be done during conda environment initialisation as [here](https://stackoverflow.com/questions/31598963/how-to-set-specific-environment-variables-when-activating-conda-environment)
 
@@ -94,7 +94,7 @@ In this project you have the option to either use the notebooks or the scripts!
 
 ### Scripts
 
-If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes.
+If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes. Python scripts are located in `scripts/` and bash scripts are located in `bash_scripts`.
 
 ### 1) Read -> Convert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save
 
