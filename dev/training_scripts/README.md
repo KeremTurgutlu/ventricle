@@ -11,23 +11,23 @@ Eventhough notebook's `script` part is very self-explanatory here is a list of p
 
 - **data_name:** Data name for experiment, valid args are `notl_brain_mr`, `notl_brain_ct`, `notl_ventricle_mr`, `notl_ventricle_ct`, `atlas_brain_mr`, `atlas_ventricle_mr`
 
-sample_size:Param("Random samples for training, default None - full", int)=None,
+- **sample_size:** Number of random samples for training, default will be None and will use full training data
 
-seed:Param("Random seed for sample_size", int)=None,
+- **seed:** Random seed for sample_size
 
-bs:Param("Batch size for training", int)=4,
+- **bs:** Batch size for training. Can be adjusted depending on your GPU memory
 
-model_name:Param("Model architecture config - baseline*", str)="baseline1",
+- **model_name:** Model architecture config - baseline, valid args are `baseline{1-11}`
 
-MODEL_NAME:Param("Model name to save the model", str)="NOTL_Brain_MR_Baseline_1",
+- MODEL_NAME:Param("Model name to save the model", str)="NOTL_Brain_MR_Baseline_1",
 
-model_dir:Param("Directory to save model", str)="notl_brain_mr_models",
+- model_dir:Param("Directory to save model", str)="notl_brain_mr_models",
 
-loss_func:Param("Loss function for training", str)='dice',
+- loss_func:Param("Loss function for training", str)='dice',
 
-eps:Param("Eps value for Adam optimizer", float)=1e-8,
+- eps:Param("Eps value for Adam optimizer", float)=1e-8,
 
-epochs:Param("Number of epochs for training", int)=2,
+- epochs:Param("Number of epochs for training", int)=2,
 
-lr:Param("Learning rate for training", float)=0.1)
+- lr:Param("Learning rate for training", float)=0.1)
 
