@@ -280,7 +280,7 @@ do
     for i in $(seq 1 $NUM_REPS)
     do
     echo experiment $i
-    python /home/turgutluk/fastai/fastai/launch.py --gpus=012345 ./distributed_training.py \
+    python /home/turgutluk/fastai/fastai/launch.py --gpus=12 ./distributed_training.py \
         --MODEL_NAME=NOTL_Ventricle_MR_Baseline_9_${j}_SAMPLES \
         --model_dir=notl_ventricle_mr_models \
         --data_name=notl_ventricle_mr \
@@ -288,7 +288,7 @@ do
         --model_name=baseline9 \
         --loss_func=dice \
         --lr=1e-2 \
-        --epochs=2 \
+        --epochs=5 \
         --one_cycle=1 \
         --early_stop=1 \
         --clip=0 \

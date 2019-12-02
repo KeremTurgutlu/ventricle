@@ -1,5 +1,7 @@
 # Text Files
-.csv
+*.csv
+*.txt
+*.pth
 
 # Models
 *.h5
