@@ -124,7 +124,7 @@ Simply run `sh ./normalize.sh` from same directory where `normalize.sh` script i
 Logs for this run will be put in `.log/normalize.log` file
 
 
-### 4) All in one go
+### 4) All data preparation in one go
 
 Optionally you can run `sh ./preparedata.sh` from same directory where `preparedata.sh` script is located to run steps 1-2-3 in one go.
 
