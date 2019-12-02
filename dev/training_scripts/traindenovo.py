@@ -1,8 +1,4 @@
 #export
-import sys
-sys.path.insert(0, "/home/turgutluk/Vent_Seg_Project/dev/")
-
-#export
 from fastai2.vision.all import *
 from fastai2.data.all import *
 from local.datasource import *
@@ -102,7 +98,8 @@ def main(
     # fit
     learn.fit_one_cycle(epochs, lr_max=lr)
 
-    # evaluate
+    # load best model and evaluate
+    learn.load(f'best_of_{MODEL_NAME}')
     learn.cbs = [cb for cb in learn.cbs if not isinstance(cb, TrackerCallback)]
     if len(dbunch.dls) == 4: 
         test1_eval, test2_eval = learn.validate(2), learn.validate(3)
