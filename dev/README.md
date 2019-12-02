@@ -76,25 +76,27 @@ In this project you have the option to either use the notebooks or the scripts!
 
 - `0) scriptrunner.ipynb`: Implements utilities for running scripts in notebook env. Better left as is.
 
-- `1a) dicom to tensor.ipynb`: Read DICOM data, resample, crop-pad and save. (has script)
+- `1a) dicom to tensor.ipynb`: Read DICOM data, resample, crop-pad and save. (has a runnable script)
 
-- `1b) skull strip.ipynb`: Skull strip data. (has script)
+- `1b) skull strip.ipynb`: Skull strip data. (has a runnable script)
 
-- `1c) normalization.ipynb`: Normalize data to (0-1) scale for training. (has script)
+- `1c) normalization.ipynb`: Normalize data to (0-1) scale for training. (has a runnable script)
 
-- `2) datasource.ipynb`: Defines fastai v2 `DataSource`
+- `2) datasource.ipynb`: Defines fastai v2 `DataSource` (python module)
 
-- `3a) trainutils.ipynb`: Implements training utilities
+- `3a) trainutils.ipynb`: Implements training utilities (python module)
 
-- `3b) traindenovo.ipynb`: End-to-end training for de novo mode (has script)
+- `3b) traindenovo.ipynb`: End-to-end training for de novo mode  (has a runnable script)
 
-- `3c) traintransfer.ipynb`: End-to-end training for weakly supervised transfer learning (has script)
+- `3c) traintransfer.ipynb`: End-to-end training for weakly supervised transfer learning (has a runnable script)
 
 
 
 ### Scripts
 
-If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes. Notebook generated python scripts are located in `local/` with other python modules, training scripts are located in `scripts/` and bash scripts are located in `bash_scripts/`.
+If you don't want to prepare data using notebooks you use scripts instead that will prepare all data in one go for you. Notebooks are mainly good for understanding what's going on interavtively and potentially changing stuff for exploration purposes. Notebook generated python scripts are located in `local/` with other python modules, training scripts are located in `training_scripts/` and bash scripts are located in `bash_scripts/`.
+
+### Data Prep
 
 ### 1) Read -> Convert2Tensor -> Resample -> Save -> Read -> Crop-Pad -> Save
 
@@ -120,6 +122,22 @@ Instead of running `[notebook run]` cells in `1c) normalization` notebook you ca
 Simply run `sh ./normalize.sh` from same directory where `normalize.sh` script is located.
 
 Logs for this run will be put in `.log/normalize.log` file
+
+
+### 4) All in one go
+
+Optionally you can run `sh ./preparedata.sh` from same directory where `preparedata.sh` script is located to run steps 1-2-3 in one go.
+
+
+
+
+### Training
+
+For detailed explanation for arguments that can be passed to training scripts please go to `training_scripts/` and read `README.md`.
+
+### 1) Training in De Novo (from Scratch) Mode
+
+This part is where we can train `ATLAS` pretrained models from scratch as well as `NOTL CT` or `NOTL MR` models for both `BRAIN` and `VENTRICLE` tasks. 
 
 
 
