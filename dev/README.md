@@ -24,9 +24,7 @@ In this project you will need to have two `yaml` config files one for preparing 
 
 `transfer_learning.yaml`: Here we define transfer learning model to pretrained model mappings for a given `TASK - MODALITY` combination. This is customizable depending on which of the pretrained models you trained locally so far. By default all of our original mappings are left in this file to give an example.
 
-**Important**
-
-Whenever you run any script or notebook two environment variables should be set:
+**Important:** Whenever you run any script or notebook two environment variables should be set:
 
 - `YAML_DATA`: Absolute path to `data.yaml`
 - `YAML_TL`: Absolute path to `transfer_learning.yaml`
