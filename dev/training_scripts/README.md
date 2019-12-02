@@ -9,7 +9,7 @@ also take `training_scripts/traindenovo.py` script and run from the terminal.
 
 Eventhough notebook's `script` part is very self-explanatory here is a list of parameters you can pass for `traindenovo.py`:
 
-`data_name:` Data name for experiment, valid args are `notl_brain_mr`, `notl_brain_ct`, `notl_ventricle_mr`, `notl_ventricle_ct`, `atlas_brain_mr`, `atlas_ventricle_mr`
+- **data_name:** Data name for experiment, valid args are `notl_brain_mr`, `notl_brain_ct`, `notl_ventricle_mr`, `notl_ventricle_ct`, `atlas_brain_mr`, `atlas_ventricle_mr`
 
 sample_size:Param("Random samples for training, default None - full", int)=None,
 
