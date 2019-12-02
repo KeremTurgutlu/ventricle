@@ -17,17 +17,17 @@ Eventhough notebook's `script` part is very self-explanatory here is a list of p
 
 - **bs:** Batch size for training. Can be adjusted depending on your GPU memory
 
-- **model_name:** Model architecture config - baseline, valid args are `baseline{1-11}`
+- **model_name:** Model architecture config - baseline, valid args are `baseline{1-11}` as defined in experiment_model_dict in `local/models.py`
 
-- MODEL_NAME:Param("Model name to save the model", str)="NOTL_Brain_MR_Baseline_1",
+- **MODEL_NAME:** Model name to save the model, e.g. NOTL_Brain_MR_Baseline_1. This will be the name of to drectory where model files will be saved into e.g. `ATLAS_Brain_MR_Baseline_1/best_of_ATLAS_Brain_MR_Baseline_1.pth`
 
-- model_dir:Param("Directory to save model", str)="notl_brain_mr_models",
+- **model_dir:** Directory to save the model. If we take the same example above and if `model_dir=atlas_brain_mr_models` then the full path for saved model will be `atlas_brain_mr_models/ATLAS_Brain_MR_Baseline_1/best_of_ATLAS_Brain_MR_Baseline_1.pth`. These structures will be then used in `transfer_learning.yaml` so we suggest keeping structure well for keeping things easy to work with. 
 
-- loss_func:Param("Loss function for training", str)='dice',
+- **loss_func:** Loss function for training, valid args are `bce`, `dice` and `mixed`
 
-- eps:Param("Eps value for Adam optimizer", float)=1e-8,
+- **eps:** Eps value for Adam optimizer
 
-- epochs:Param("Number of epochs for training", int)=2,
+- **epochs:** Number of epochs for training
 
-- lr:Param("Learning rate for training", float)=0.1)
+- **lr:** Learning rate for training
 
